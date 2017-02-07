@@ -1,0 +1,52 @@
+#!/bin/bash
+
+case $1 in
+  '')  Method="none"  ;;
+  --*) Method="long"  ;;
+  -*)  Method="short" ;;
+  *)   Method="words" ;;
+esac
+
+case ${Method} in
+  'none')
+    echo "ExampleUsage: bash $(basename $0) {Application} {Environment:test|dev|stg|prod}"
+    exit 0
+    ;;
+  'words')
+    Application=${1:-'helloworld'}
+    Environment=${2:-'test'}
+    Action=${3:-'plan'}
+    ;;
+  'short')
+    ;;
+  'long')
+    ;;
+  *)
+    echo "[error] Unknown Method: ${Method}"
+    exit 1
+    ;;
+esac
+
+echo "### Terraform Helper ###"
+echo "[ok] Application Found: ${Application}"
+echo "[ok] Environment Found: ${Environment}"
+echo "[ok] Action Found: ${Action}"
+
+VariableFile="-var-file=${Application}/vars/${Environment}.tfvars"
+StateFile="-state=${Application}/state/${Environment}.tfstate"
+ApplicationPath="./${Application}/"
+
+case ${Action} in
+  plan|apply|refresh|destroy)
+    echo ">>> terraform ${Action} ${VariableFile} ${StateFile} ${ApplicationPath}"
+    terraform ${Action} ${VariableFile} ${StateFile} ${ApplicationPath}
+    ;;
+  show)
+    echo ">>> terraform ${Action} ${StateFile}"
+    terraform ${Action} ${StateFile}
+    ;;
+  *)
+    echo "[error] Unknown Action: ${Action}"
+    exit 1
+    ;;
+esac

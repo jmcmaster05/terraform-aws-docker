@@ -1,0 +1,7 @@
+#aws_profile = "terraform-mac"
+#aws_region  = "us-west-2"
+#
+## Platform: Amazon Linux
+## Source: amazon/amzn-ami-hvm-2016.09.1.20170119-x86_64-ebs
+#ami_default = "ami-9e73ccfe"
+#instance_type = "t2.nano"

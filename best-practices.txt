@@ -1,0 +1,19 @@
+https://github.com/hashicorp/best-practices
+
+https://github.com/hashicorp/best-practices/blob/master/terraform/providers/aws/us_east_1_staging/terraform.tfvars
+
+Network
+  VPC
+  Public subnets
+  Private subnets
+  NAT
+  OpenVPN
+  Bastion host
+Data
+  Consul cluster
+  Vault HA with Consul backend
+Compute
+  Node.js web app servers
+  HAProxy for load balancing
+DNS
+

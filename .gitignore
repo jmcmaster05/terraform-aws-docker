@@ -1,0 +1,6 @@
+# AWS Private Credentials
+.aws
+
+# Terraform StateFiles
+*.tfstate
+*.tfstate.backup
