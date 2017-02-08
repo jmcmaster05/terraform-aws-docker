@@ -1,31 +1,19 @@
 #!/bin/bash
 
-case $1 in
-  '')  Method="none"  ;;
-  --*) Method="long"  ;;
-  -*)  Method="short" ;;
-  *)   Method="words" ;;
-esac
+if [ $# -eq 0 ] ||
+   [ $1 == 'help' ] ||
+   [ $1 == '-h' ] ||
+   [ $1 == '--help' ]; then
+  echo "ExampleUsage: bash $(basename $0) {Application} {Environment} {Action}"
+  echo "   Application: Application Name such as helloworld etc."
+  echo "   Environment: Environment Code such as test|dev|stg|prod etc."
+  echo "   Action:      Terraform Action such as plan|apply|show|refresh|destroy etc."
+  exit 0
+fi
 
-case ${Method} in
-  'none')
-    echo "ExampleUsage: bash $(basename $0) {Application} {Environment:test|dev|stg|prod}"
-    exit 0
-    ;;
-  'words')
-    Application=${1:-'helloworld'}
-    Environment=${2:-'test'}
-    Action=${3:-'plan'}
-    ;;
-  'short')
-    ;;
-  'long')
-    ;;
-  *)
-    echo "[error] Unknown Method: ${Method}"
-    exit 1
-    ;;
-esac
+Application=${1:-'helloworld'}
+Environment=${2:-'test'}
+Action=${3:-'plan'}
 
 echo "### Terraform Helper ###"
 echo "[ok] Application Found: ${Application}"
